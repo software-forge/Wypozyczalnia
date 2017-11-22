@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Wypozyczalnia
 {
+    /*
+        TODO: wyświetlanie tytułu menu 
+    */
+
     class Menu
     {
         string[] elementy;

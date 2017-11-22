@@ -40,13 +40,43 @@ namespace Wypozyczalnia
         /// </summary>
         public void Usun()
         {
-            Console.Clear();
-            Console.WriteLine("-- Nad tą opcją jeszcze pracujemy --");
-            Console.WriteLine("ENTER - powrót");
-            ConsoleKeyInfo info = new ConsoleKeyInfo();
-            while (info.Key != ConsoleKey.Enter)
+            if(samochody.Count() > 0)
             {
-                info = Console.ReadKey();
+                while (true)
+                {
+                    Menu listaAut = new Menu(samochody.Count() + 1);
+                    foreach (Samochod s in samochody)
+                    {
+                        listaAut.Dodaj(s.Opis());
+                    }
+                    listaAut.Dodaj("Powrót");
+
+                    int wybor = listaAut.Wybor();
+
+                    if (wybor < listaAut.liczbaElementow - 1)
+                    {
+                        Komunikat k = new Komunikat("Czy na pewno chcesz usunąć wybrane auto z floty?");
+                        if (k.Zapytaj("Usuń", "Anuluj"))
+                        {
+                            samochody.RemoveAt(wybor);
+                            k = new Komunikat("Usunięto");
+                            k.Wyswietl();
+                        }
+                        else
+                        {
+                            k = new Komunikat("Anulowano");
+                            k.Wyswietl();
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                Komunikat k = new Komunikat("-- Brak samochodów --");
             }
         }
 
@@ -78,26 +108,13 @@ namespace Wypozyczalnia
                         break;
                     }
                 }
-
-
             }
             else
             {
-                Console.Clear();
-                Console.WriteLine("-- Brak samochodów --");
-
-                Console.WriteLine("ENTER - powrót");
-                ConsoleKeyInfo info = new ConsoleKeyInfo();
-                while (info.Key != ConsoleKey.Enter)
-                {
-                    info = Console.ReadKey();
-                }
+                Komunikat k = new Komunikat("-- Brak samochodów --");
+                k.Wyswietl();
             }
         }
 
-        public List<Samochod> Lista()
-        {
-            return samochody;
-        }
     }
 }
