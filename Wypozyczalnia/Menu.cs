@@ -44,11 +44,15 @@ namespace Wypozyczalnia
         /// <summary>
         /// Wypisuje menu w konsoli i zaznacza własciwy element
         /// </summary>
-        private void Rysuj()
+        private void Rysuj(string tytul)
         {
             Console.Clear();
             Console.SetCursorPosition(0, 0);
 
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(tytul.PadRight(szerokosc));
+            Console.ResetColor();
             for (int i = 0; i < liczbaElementow; i++)
             {
                 if (i == zaznaczony)
@@ -64,7 +68,6 @@ namespace Wypozyczalnia
 
                 Console.WriteLine(elementy[i].PadRight(szerokosc));
             }
-
             Console.ResetColor();
         }
 
@@ -72,11 +75,11 @@ namespace Wypozyczalnia
         /// Zwraca indeks wybranego elementu menu
         /// </summary>
         /// <returns></returns>
-        public int Wybor()
+        public int Wybor(string tytul)
         {
             while (true)
             {
-                Rysuj();
+                Rysuj(tytul);
 
                 ConsoleKeyInfo klawisz = Console.ReadKey();
                 switch (klawisz.Key)

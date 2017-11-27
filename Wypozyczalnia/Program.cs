@@ -23,7 +23,7 @@ namespace Wypozyczalnia
             int wybor = 0;
             while (wybor != 2)
             {
-                switch (menuGlowne.Wybor())
+                switch (menuGlowne.Wybor("MENU GŁÓWNE"))
                 {
                     case 0:
                         flota.Dodaj();

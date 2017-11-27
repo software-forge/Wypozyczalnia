@@ -8,7 +8,7 @@ namespace Wypozyczalnia
 {
     struct Samochod
     {
-        int id;
+        public int id;
         public decimal Cena;
         public string Marka;
         public string Model;

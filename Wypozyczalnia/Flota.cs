@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 using System.Xml;
 
 namespace Wypozyczalnia
@@ -10,7 +11,6 @@ namespace Wypozyczalnia
     class Flota
     {
         List<Samochod> samochody;
-        XmlDocument document;
 
         public Flota(int wielkosc)
         {
@@ -56,7 +56,7 @@ namespace Wypozyczalnia
                     }
                     listaAut.Dodaj("Powrót");
 
-                    int wybor = listaAut.Wybor();
+                    int wybor = listaAut.Wybor("USUWANIE");
 
                     if (wybor < listaAut.liczbaElementow - 1)
                     {
@@ -102,7 +102,7 @@ namespace Wypozyczalnia
 
                 while (true)
                 {
-                    int wybor = listaAut.Wybor();
+                    int wybor = listaAut.Wybor("FLOTA");
 
                     if (wybor < listaAut.liczbaElementow - 1)
                     {
@@ -122,20 +122,63 @@ namespace Wypozyczalnia
             }
         }
 
-        // TODO:
+        /// <summary>
+        /// Zapełnia plik "flota.xml" samochodami z tablicy
+        /// </summary>
         public void Wczytaj()
         {
+            try
+            {
+                XmlDocument document = new XmlDocument();
+                document.Load("flota.xml");
 
+                foreach (XmlNode carNode in document.DocumentElement.ChildNodes)
+                {
+                    Samochod s = new Samochod();
+                    s.Marka = carNode["marka"].InnerText;
+                    s.Model = carNode["model"].InnerText;
+                    s.Cena = Convert.ToDecimal(carNode["cena"].InnerText);
+                    samochody.Add(s);
+                }
+            }
+            catch(System.IO.FileNotFoundException)
+            {
+
+            }
+            
         }
 
-        // TODO:
+        /// <summary>
+        /// Zapisuje samochody z tablicy do pliku "flota.xml"
+        /// </summary>
         public void Zapisz()
         {
-            document = new XmlDocument();
+            XmlDocument document = new XmlDocument();
+            XmlNode fleetNode = document.CreateElement("flota");
+            document.AppendChild(fleetNode);
 
-            // Rzuca wyjątek:
-            //document.Load("Flota.xml");
+            foreach(Samochod s in samochody)
+            {
+                XmlNode carNode = document.CreateElement("samochod");
+                XmlAttribute id = document.CreateAttribute("id");
+                id.Value = Convert.ToString(s.id);
+                carNode.Attributes.Append(id);
+                fleetNode.AppendChild(carNode);
 
+                XmlNode brandNode = document.CreateElement("marka");
+                brandNode.InnerText = s.Marka;
+                carNode.AppendChild(brandNode);
+
+                XmlNode modelNode = document.CreateElement("model");
+                modelNode.InnerText = s.Model;
+                carNode.AppendChild(modelNode);
+
+                XmlNode priceNode = document.CreateElement("cena");
+                priceNode.InnerText = Convert.ToString(s.Cena);
+                carNode.AppendChild(priceNode);
+            }
+
+            document.Save("flota.xml");
         }
     }
 }

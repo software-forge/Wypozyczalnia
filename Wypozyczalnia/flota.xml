@@ -1,0 +1,17 @@
+<flota>
+  <samochod id="0">
+    <marka>Honda</marka>
+    <model>Civic</model>
+    <cena>49,99</cena>
+  </samochod>
+  <samochod id="0">
+    <marka>Toyota</marka>
+    <model>Corolla</model>
+    <cena>39,99</cena>
+  </samochod>
+  <samochod id="0">
+    <marka>Opel</marka>
+    <model>Astra Classic</model>
+    <cena>39,99</cena>
+  </samochod>
+</flota>
