@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-/*
-    TODO: zapis floty do pliku .xml
- */
+using System.Xml;
 
 namespace Wypozyczalnia
 {
     class Flota
     {
         List<Samochod> samochody;
+        XmlDocument document;
 
         public Flota(int wielkosc)
         {
@@ -34,7 +32,7 @@ namespace Wypozyczalnia
             s.Cena = Convert.ToDecimal(Console.ReadLine());
             samochody.Add(s);
             Komunikat k = new Komunikat("Dodano");
-            k.Wyswietl();
+            k.Powiadom();
         }
 
         /// <summary>
@@ -67,12 +65,12 @@ namespace Wypozyczalnia
                         {
                             samochody.RemoveAt(wybor);
                             k = new Komunikat("Usunięto");
-                            k.Wyswietl();
+                            k.Powiadom();
                         }
                         else
                         {
                             k = new Komunikat("Anulowano");
-                            k.Wyswietl();
+                            k.Powiadom();
                         }
                     }
                     else
@@ -84,7 +82,7 @@ namespace Wypozyczalnia
             else
             {
                 Komunikat k = new Komunikat("-- Brak samochodów --");
-                k.Wyswietl();
+                k.Powiadom();
             }
         }
 
@@ -120,9 +118,24 @@ namespace Wypozyczalnia
             else
             {
                 Komunikat k = new Komunikat("-- Brak samochodów --");
-                k.Wyswietl();
+                k.Powiadom();
             }
         }
 
+        // TODO:
+        public void Wczytaj()
+        {
+
+        }
+
+        // TODO:
+        public void Zapisz()
+        {
+            document = new XmlDocument();
+
+            // Rzuca wyjątek:
+            //document.Load("Flota.xml");
+
+        }
     }
 }

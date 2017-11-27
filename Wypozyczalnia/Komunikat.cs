@@ -42,7 +42,7 @@ namespace Wypozyczalnia
         /// <summary>
         /// Wyświetla prosty komunikat, który można tylko zatwierdzić
         /// </summary>
-        public void Wyswietl()
+        public void Powiadom()
         {
             Console.Clear();
             Console.WriteLine(napis);

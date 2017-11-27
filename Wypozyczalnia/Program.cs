@@ -10,13 +10,15 @@ namespace Wypozyczalnia
     {
         static void Main(string[] args)
         {
-            Menu menuGlowne = new Menu(4);
+            Menu menuGlowne = new Menu(5);
             menuGlowne.Dodaj("Dodaj samochód");
             menuGlowne.Dodaj("Usuń samochód");
             menuGlowne.Dodaj("Pokaż flotę");
             menuGlowne.Dodaj("Wyjdź");
 
             Flota flota = new Flota(100);
+
+            flota.Wczytaj();
 
             int wybor = 0;
             while (wybor != 2)
@@ -33,6 +35,7 @@ namespace Wypozyczalnia
                         flota.Wyswietl();
                         break;
                     case 3:
+                        flota.Zapisz();
                         return;
                 }
             }
