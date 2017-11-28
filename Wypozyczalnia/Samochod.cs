@@ -8,11 +8,46 @@ namespace Wypozyczalnia
 {
     struct Samochod
     {
-        public int id;
-        public decimal Cena;
-        public string Marka;
-        public string Model;
+        /// <summary>
+        /// Nieujemna wartość całkowitoliczbowa
+        /// </summary>
+        private int id;
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                if (value >= 0)
+                    id = value;
+            }
+        }
 
+        /// <summary>
+        /// Wartość typu decimal większa lub równa zeru i mniejsza lub równa 1000
+        /// </summary>
+        private decimal cena;
+        public decimal Cena
+        {
+            get
+            {
+                return cena;
+            }
+            set
+            {
+                if (value >= 0 && value <= 1000)
+                    cena = value;
+            }
+        }
+
+        private string marka;
+        public string Marka { get => marka; set => marka = value; }
+
+        private string model;
+        public string Model { get => model; set => model = value; }
+       
         /// <summary>
         /// Wyświetla w konsoli informacje o samochodzie
         /// </summary>

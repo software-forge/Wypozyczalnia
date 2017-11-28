@@ -36,6 +36,84 @@ namespace Wypozyczalnia
         }
 
         /// <summary>
+        /// Procedura edycji atrybutów wybranego samochodu z tablicy
+        /// </summary>
+        public void Edytuj()
+        {
+            if(samochody.Count() > 0)
+            {
+
+                while (true)
+                {
+                    Menu listaAut = new Menu(samochody.Count() + 1);
+                    foreach (Samochod s in samochody)
+                    {
+                        listaAut.Dodaj(s.Opis());
+                    }
+                    listaAut.Dodaj("Powrót");
+
+                    int wybor = listaAut.Wybor("EDYCJA");
+
+                    if (wybor < listaAut.liczbaElementow - 1)
+                    {
+                        while(true)
+                        {
+                            Samochod s = samochody[wybor];
+                            Menu listaAtrybutow = new Menu(5);
+                            listaAtrybutow.Dodaj("ID: " + Convert.ToString(s.Id));
+                            listaAtrybutow.Dodaj("Marka: " + s.Marka);
+                            listaAtrybutow.Dodaj("Model: " + s.Model);
+                            listaAtrybutow.Dodaj("Cena: " + Convert.ToString(s.Cena));
+                            listaAtrybutow.Dodaj("Powrót");
+                            int atrybut = listaAtrybutow.Wybor("EDYCJA");
+                            if (atrybut == 4)
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                Console.Clear();
+                                switch (atrybut)
+                                {
+                                    case 0:
+                                        Console.WriteLine("ID: " + s.Id);
+                                        Console.Write("Nowe ID: ");
+                                        s.Id = Convert.ToInt16(Console.ReadLine());
+                                        break;
+                                    case 1:
+                                        Console.WriteLine("Marka: " + s.Marka);
+                                        Console.Write("Nowa marka: ");
+                                        s.Marka = Console.ReadLine();
+                                        break;
+                                    case 2:
+                                        Console.WriteLine("Model: " + s.Model);
+                                        Console.Write("Nowy model: ");
+                                        s.Model = Console.ReadLine();
+                                        break;
+                                    case 3:
+                                        Console.WriteLine("Cena: " + s.Cena);
+                                        Console.Write("Nowa cena: ");
+                                        s.Cena = Convert.ToDecimal(Console.ReadLine());
+                                        break;
+                                }
+                                samochody[wybor] = s;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                Komunikat k = new Komunikat("-- Brak samochodów --");
+                k.Powiadom();
+            }
+        }
+
+        /// <summary>
         /// Procedura usunięcia wybranego samochodu z tablicy
         /// </summary>
         public void Usun()
@@ -45,7 +123,7 @@ namespace Wypozyczalnia
             {
                 while (true)
                 {
-                    // Jeżeli użytkownik usunął wszystkie samochody, to powrót do głównego menu !!!
+                    // Jeżeli użytkownik usunął wszystkie samochody, to powrót do głównego menu
                     if (samochody.Count() == 0)
                         break;
 
@@ -161,7 +239,7 @@ namespace Wypozyczalnia
             {
                 XmlNode carNode = document.CreateElement("samochod");
                 XmlAttribute id = document.CreateAttribute("id");
-                id.Value = Convert.ToString(s.id);
+                id.Value = Convert.ToString(s.Id);
                 carNode.Attributes.Append(id);
                 fleetNode.AppendChild(carNode);
 
