@@ -4,10 +4,7 @@ using System.Text;
 
 namespace Wypozyczalnia
 {
-    /*
-        TODO - zastosować gdzie się da 
-    */
-
+    
     class Komunikat
     {
         string napis;

@@ -59,14 +59,13 @@ namespace Wypozyczalnia
                         while(true)
                         {
                             Samochod s = samochody[wybor];
-                            Menu listaAtrybutow = new Menu(5);
-                            listaAtrybutow.Dodaj("ID: " + Convert.ToString(s.Id));
+                            Menu listaAtrybutow = new Menu(4);
                             listaAtrybutow.Dodaj("Marka: " + s.Marka);
                             listaAtrybutow.Dodaj("Model: " + s.Model);
                             listaAtrybutow.Dodaj("Cena: " + Convert.ToString(s.Cena));
                             listaAtrybutow.Dodaj("Powrót");
                             int atrybut = listaAtrybutow.Wybor("EDYCJA");
-                            if (atrybut == 4)
+                            if (atrybut == 3)
                             {
                                 break;
                             }
@@ -76,21 +75,16 @@ namespace Wypozyczalnia
                                 switch (atrybut)
                                 {
                                     case 0:
-                                        Console.WriteLine("ID: " + s.Id);
-                                        Console.Write("Nowe ID: ");
-                                        s.Id = Convert.ToInt16(Console.ReadLine());
-                                        break;
-                                    case 1:
                                         Console.WriteLine("Marka: " + s.Marka);
                                         Console.Write("Nowa marka: ");
                                         s.Marka = Console.ReadLine();
                                         break;
-                                    case 2:
+                                    case 1:
                                         Console.WriteLine("Model: " + s.Model);
                                         Console.Write("Nowy model: ");
                                         s.Model = Console.ReadLine();
                                         break;
-                                    case 3:
+                                    case 2:
                                         Console.WriteLine("Cena: " + s.Cena);
                                         Console.Write("Nowa cena: ");
                                         s.Cena = Convert.ToDecimal(Console.ReadLine());

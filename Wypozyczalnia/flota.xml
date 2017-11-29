@@ -11,8 +11,8 @@
   </samochod>
   <samochod id="0">
     <marka>Toyota</marka>
-    <model>Aygo</model>
-    <cena>29,99</cena>
+    <model>Auris</model>
+    <cena>49,99</cena>
   </samochod>
   <samochod id="0">
     <marka>Fiat</marka>
